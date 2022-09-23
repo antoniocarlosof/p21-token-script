@@ -12,6 +12,9 @@ class App extends Component {
 
     const accounts = await web3Connection.eth.getAccounts()
     this.setState({ account: accounts[0]})
+
+    const smartContract = new web3Connection.eth.Contract(TODO_LIST_ABI, TODO_LIST_ADDRESS)
+    this.setState({ smartContract })
   }
 
   constructor(props) {
@@ -26,6 +29,30 @@ class App extends Component {
     this.offer = this.offer.bind(this)
   }
   
+  allowSystem(amount){
+    this.setState({ loading: true })
+    this.state.smartContract.methods.allowSystem(amount).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({ loading: false })
+    })
+  }
+
+  buy(id, amountToBuy){
+    this.setState({ loading: true })
+    this.state.smartContract.methods.buy(id, amountToBuy).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({ loading: false })
+    })
+  }
+
+  offer(amount, paymentWei){
+    this.setState({ loading: true })
+    this.state.smartContract.methods.offer(amount, paymentWei).send({ from: this.state.account })
+    .once('receipt', (receipt) => {
+      this.setState({ loading: false })
+    })
+  }
+
   return (
 
   );
