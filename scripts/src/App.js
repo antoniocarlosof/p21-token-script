@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import { Component } from 'react';
 import './App.css';
+import offerList from './config.js';
 
 class App extends Component {
   componentDidMount() {
@@ -15,12 +16,16 @@ class App extends Component {
 
     const smartContract = new web3Connection.eth.Contract(TODO_LIST_ABI, TODO_LIST_ADDRESS)
     this.setState({ smartContract })
+
+    const offers = await smartContract.methods.offerList().call()
+    this.setState({ offers })
   }
 
   constructor(props) {
     super(props)
     this.state = { 
       account: '',
+      offers: [],
       loading: true
     }
 
@@ -53,9 +58,25 @@ class App extends Component {
     })
   }
 
-  return (
-
-  );
+  render(){  
+    return (
+      <div>
+        <div className='container-fluid'>
+          <div className='row'>
+            <main role='main' className='col-4 align-self-center justify-content-center'>
+              {
+                this.state.loading
+                ? <div id="loader" className="text-center">
+                    <p className="text-center">Loading...</p>
+                  </div>
+                : <offerList list={this.state.offers} />
+              }
+            </main>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
