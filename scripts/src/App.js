@@ -19,6 +19,8 @@ class App extends Component {
 
     const offers = await smartContract.methods.offerList().call()
     this.setState({ offers })
+
+    this.setState({ loading: false })
   }
 
   constructor(props) {
