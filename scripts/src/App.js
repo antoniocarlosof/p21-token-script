@@ -71,7 +71,7 @@ class App extends Component {
                 ? <div id="loader" className="text-center">
                     <p className="text-center">Loading...</p>
                   </div>
-                : <offerList list={this.state.offers} />
+                : <offerList list={this.state.offers} buy={this.buy}/>
               }
             </main>
           </div>
