@@ -1,4 +1,4 @@
-export const OFFER_LIST_ADDRESS = '0xb37cCF3c5EdfE52635E432976f0cEcfd66748b50'
+export const OFFER_LIST_ADDRESS = '0xC3e42C9B24225CaDc5b2db428eCBd01C681CbEaA'
 
 export const OFFER_LIST_ABI = [
     {
