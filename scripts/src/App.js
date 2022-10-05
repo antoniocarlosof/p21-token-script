@@ -1,7 +1,8 @@
 import Web3 from 'web3';
 import { Component } from 'react';
 import './App.css';
-import offerList from './config.js';
+import OfferList from './offerlist.js';
+import { OFFER_LIST_ABI, OFFER_LIST_ADDRESS } from './config.js';
 
 class App extends Component {
   componentDidMount() {
@@ -14,11 +15,24 @@ class App extends Component {
     const accounts = await web3Connection.eth.getAccounts()
     this.setState({ account: accounts[0]})
 
-    const smartContract = new web3Connection.eth.Contract(TODO_LIST_ABI, TODO_LIST_ADDRESS)
+    const smartContract = new web3Connection.eth.Contract(OFFER_LIST_ABI, OFFER_LIST_ADDRESS)
     this.setState({ smartContract })
+    
+    const offerCount = await smartContract.methods.offerCount().call()
 
-    const offers = await smartContract.methods.offerList().call()
-    this.setState({ offers })
+    for(var i = 0; i < offerCount; i++){
+      const offer = await smartContract.methods.offerList(i).call()
+      var joined = this.state.offers.concat(offer)
+      //console.log(joined)
+      this.setState({
+        offers: joined
+        //offers: [...this.state.offers, offer]
+      })
+      //console.log(this.state.offers[i])
+    }
+    //this.setState({ offers })
+
+    console.log(this.state.offers)
 
     this.setState({ loading: false })
   }
@@ -31,17 +45,8 @@ class App extends Component {
       loading: true
     }
 
-    this.allowSystem = this.allowSystem.bind(this)
     this.buy = this.buy.bind(this)
     this.offer = this.offer.bind(this)
-  }
-  
-  allowSystem(amount){
-    this.setState({ loading: true })
-    this.state.smartContract.methods.allowSystem(amount).send({ from: this.state.account })
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
   }
 
   buy(id, amountToBuy){
@@ -65,13 +70,13 @@ class App extends Component {
       <div>
         <div className='container-fluid'>
           <div className='row'>
-            <main role='main' className='col-4 align-self-center justify-content-center'>
+            <main role='main' className='col-3 align-self-center justify-content-center'>
               {
                 this.state.loading
                 ? <div id="loader" className="text-center">
                     <p className="text-center">Loading...</p>
                   </div>
-                : <offerList list={this.state.offers} buy={this.buy}/>
+                : <OfferList offers={this.state.offers} buy={this.buy}/>
               }
             </main>
           </div>
