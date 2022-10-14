@@ -12,7 +12,7 @@ function App() {
       <Routes>
           <Route exact path='/' element={<Home/>} />
           <Route path='/offers' element={<Offers/>} />
-          <Route path='/sell' component={<Sell/>} />    
+          <Route path='/sell' element={<Sell/>} />    
       </Routes>
       </Router>
   );

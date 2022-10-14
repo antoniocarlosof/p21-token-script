@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Link } from "react-router-dom";
 
 class OfferList extends Component {
     constructor(props) {
@@ -40,6 +41,10 @@ class OfferList extends Component {
                                     }
                                 </tbody>
                             </table>
+                            <Link
+                                type='button'
+                                className='btn btn-danger'
+                                to='/'>Voltar</Link>
                         </div>
                         <div className='col-6'>
                         {
