@@ -15,17 +15,10 @@ class Sell extends Component{
     
         const smartContract = new web3Connection.eth.Contract(OFFER_LIST_ABI, OFFER_LIST_ADDRESS)
         this.setState({ smartContract })
-        
-        const offerCount = await smartContract.methods.offerCount().call()
     
-        for(var i = 0; i < offerCount; i++){
-          const offer = await smartContract.methods.offerList(i).call()
-          if (offer.amountOfTokens > 0){
-            this.setState({
-              offers: [...this.state.offers, offer]
-            })
-          }
-        }
+        const balance = await smartContract.methods.balanceOf(this.state.account).call()
+        const amountOffered = await smartContract.methods.amountOffered(this.state.account).call()
+        this.setState({ balance, amountOffered })
     
         this.setState({ loading: false })
       }
@@ -34,7 +27,8 @@ class Sell extends Component{
         super(props)
         this.state = { 
           account: '',
-          offers: [],
+          amountOffered: '',
+          balance: '',
           loading: true
         }
 
@@ -51,8 +45,8 @@ class Sell extends Component{
 
       render() {
         return(
-            
-        )
+
+        );
       }
 }
 
