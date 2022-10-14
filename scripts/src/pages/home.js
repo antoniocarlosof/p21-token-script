@@ -12,6 +12,12 @@ class Home extends Component{
                             className='btn btn-success'
                             to="/offers">Offers</Link>
                     </div>
+                    <div className='col-4'>
+                        <Link
+                            type='button'
+                            className='btn btn-success'
+                            to="/sell"> Sell token</Link>
+                    </div>
                 </div>
             </div>
         )
