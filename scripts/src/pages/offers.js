@@ -43,7 +43,6 @@ class Offers extends Component {
     }
 
     this.buy = this.buy.bind(this)
-    this.offer = this.offer.bind(this)
   }
 
   buy(id, amountToBuy){
@@ -54,14 +53,6 @@ class Offers extends Component {
     const valueEther = valueDollar/1300
     const valueToSend = web3Connection.utils.toWei(valueEther.toString(), "ether")
     this.state.smartContract.methods.buy(id, amountToBuy).send({ from: this.state.account, value: valueToSend})
-    .once('receipt', (receipt) => {
-      this.setState({ loading: false })
-    })
-  }
-
-  offer(amount, paymentWei){
-    this.setState({ loading: true })
-    this.state.smartContract.methods.offer(amount, paymentWei).send({ from: this.state.account })
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })
