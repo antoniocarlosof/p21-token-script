@@ -50,9 +50,9 @@ class Offers extends Component {
     this.setState({ loading: true })
     const web3Connection = new Web3(Web3.givenProvider || "http://localhost:8545")
     const offer = this.state.offers[id]
-    const valueDollar = amountToBuy*offer.pricePerToken
+    const valueDollar = parseInt(amountToBuy)*parseInt(offer.pricePerToken)
     const valueEther = valueDollar/1300
-    const valueToSend = web3Connection.utils.toWei(valueEther, "ether")
+    const valueToSend = web3Connection.utils.toWei(valueEther.toString(), "ether")
     this.state.smartContract.methods.buy(id, amountToBuy).send({ from: this.state.account, value: valueToSend})
     .once('receipt', (receipt) => {
       this.setState({ loading: false })

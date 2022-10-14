@@ -11,9 +11,8 @@ class OfferList extends Component {
     render(){
         return(
             <div>
-                <div className='container'>
-                    <div className='row'>
-                        <div className='col-3'>
+                <div className='row'>
+                        <div className='col-6'>
                             <table className='table'>
                                 <thead>
                                     <tr className='table-success'>
@@ -34,7 +33,7 @@ class OfferList extends Component {
                                                     <td><button 
                                                         type="button" 
                                                         className="btn btn-success" 
-                                                        onClick={this.setState({ showOffer: true, offer: offer })}>See offer</button></td>
+                                                        onClick={(event) => this.setState({ showOffer: true, offer: offer })}>See offer</button></td>
                                                 </tr>
                                             )
                                         })
@@ -42,7 +41,7 @@ class OfferList extends Component {
                                 </tbody>
                             </table>
                         </div>
-                        <div className='col-3'>
+                        <div className='col-6'>
                         {
                             this.state.showOffer
                             ? <div className='m2'>
@@ -50,21 +49,19 @@ class OfferList extends Component {
                                 <h5 className='text-start'><em>Tokens available:</em> {this.state.offer.amountOfTokens}</h5>
                                 <h5 className='text-start'><em>Price of each token:</em> {this.state.offer.pricePerToken} USD</h5>
                                 <input 
-                                    type='number' 
-                                    value={1} 
+                                    type='number'  
                                     max={this.state.offer.amountOfTokens} 
                                     min={1} 
                                     id='amountToBuy'
-                                    onChange={(input) => this.amount = input}></input>
+                                    onChange={(input) => this.setState({amount: input.target.value})}></input>
                                 <button
                                     type='button'
-                                    className='btn-success'
-                                    onClick={(event) => this.props.buy(this.state.offer.id, this.amount.value)}>Buy</button>
+                                    className='btn btn-success'
+                                    onClick={(event) => this.props.buy(this.state.offer.id, this.state.amount)}>Buy</button>
                             </div>
-                            : <div></div>
+                            : <div>Choose an offer</div>
                         }
                         </div>
-                    </div>
                 </div> 
             </div>  
         );
