@@ -20,6 +20,7 @@ function App() {
                     <Nav className="me-auto">
                         <Nav.Link href="/offers">Offers</Nav.Link>
                         <Nav.Link href="/sell">Sell</Nav.Link>
+                        <Nav.Link href="/holders">Holders</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
