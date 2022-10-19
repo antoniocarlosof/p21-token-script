@@ -7,6 +7,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Home from './pages/home.js'
 import Offers from './pages/offers.js';
 import Sell from './pages/sell.js';
+import Holders from './pages/holders';
 
 function App() {
     //<Route path='/profile' component={<Profile/>} />
@@ -25,7 +26,8 @@ function App() {
             <Routes>
                 <Route exact path='/' element={<Home/>} />
                 <Route path='/offers' element={<Offers/>} />
-                <Route path='/sell' element={<Sell/>} />    
+                <Route path='/sell' element={<Sell/>} />
+                <Route path='/holders' component={<Holders/>} />    
             </Routes>
         </div>
       </Router>
