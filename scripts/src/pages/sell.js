@@ -66,20 +66,20 @@ class Sell extends Component{
                       max={this.state.balance - this.state.amountOffered}
                       onChange={(input) => this.setState({newOffer: input.target.value})}></input>
 
-                      <p>Price per token - USD</p>
-                      <input
+                    <p>Price per token - USD</p>
+                    <input
                       type='number'
                       className='form-control'
                       id='price'
                       min={0}
                       onChange={(input) => this.setState({offerPrice: input.target.value})}></input>
 
-                      <button
-                        type='button'
-                        className='btn btn-success'
-                        onClick={(event) => this.offer(this.state.newOffer, this.state.offerPrice)}>Offer</button>
+                    <button
+                      type='button'
+                      className='btn btn-success'
+                      onClick={(event) => this.offer(this.state.newOffer, this.state.offerPrice)}>Offer</button>
                       
-                      <Link
+                    <Link
                       type='button'
                       className='btn btn-danger'
                       to='/'>Voltar</Link>
