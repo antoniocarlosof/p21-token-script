@@ -10,9 +10,9 @@ import Home from './pages/home.js'
 import Offers from './pages/offers.js';
 import Sell from './pages/sell.js';
 import Holders from './pages/holders';
+import Profile from './pages/profile';
 
 function App() {
-    //<Route path='/profile' component={<Profile/>} />
   return (
       <Router>
         <div>
@@ -25,7 +25,7 @@ function App() {
                         <Nav.Link href="/holders">Holders</Nav.Link>
                     </Nav>
                     <Navbar.Collapse className='justify-content-end'>
-                        <FontAwesomeIcon icon={faUser} size='lg' />
+                        <Nav.Link href="/profile"> <FontAwesomeIcon icon={faUser} size='lg' /> </Nav.Link>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
@@ -33,7 +33,8 @@ function App() {
                 <Route exact path='/' element={<Home/>} />
                 <Route path='/offers' element={<Offers/>} />
                 <Route path='/sell' element={<Sell/>} />
-                <Route path='/holders' component={<Holders/>} />    
+                <Route path='/holders' component={<Holders/>} /> 
+                <Route path='/profile' component={<Profile/>} />   
             </Routes>
         </div>
       </Router>
