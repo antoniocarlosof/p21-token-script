@@ -22,6 +22,7 @@ class Offers extends Component {
 
     for(var i = 0; i < offerCount; i++){
       const offer = await smartContract.methods.offerList(i).call()
+      
       if (offer.amountOfTokens > 0){
         this.setState({
           offers: [...this.state.offers, offer]
@@ -62,12 +63,12 @@ class Offers extends Component {
     return (
       <div>
         <div className='container-fluid'>
-          <div className='row'>
+          <div className='row mt-4'>
             <main role='main' className='align-self-center justify-content-center'>
               {
                 this.state.loading
                 ? <div id="loader" className="text-center">
-                    <p className="text-center">Loading...</p>
+                    <p className="text-center text-success">Loading...</p>
                   </div>
                 : <OfferList offers={this.state.offers} buy={this.buy}/>
               }

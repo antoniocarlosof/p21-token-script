@@ -48,11 +48,11 @@ class Sell extends Component{
         return(
           <div>
             <div className='container-fluid'>
-              <div className='row justify-content-center'>
-                <div className='col-4'>
-                  <h5 className='text-start'><em>Address: </em>{this.state.account}</h5>
-                  <h5 className='text-start'><em>Balance: </em>{this.state.balance}</h5>
-                  <h5 className='text-start'><em>Amount available: </em>{this.state.balance - this.state.amountOffered}</h5>
+              <div className='row justify-content-center mt-4'>
+                <div className='col-6'>
+                  <h5 className='text-start text-success'><em>Address: </em>{this.state.account}</h5>
+                  <h5 className='text-start text-success'><em>Balance: </em>{this.state.balance}</h5>
+                  <h5 className='text-start text-success'><em>Amount available: </em>{this.state.balance - this.state.amountOffered}</h5>
 
                   <div className='mt-2'>
                     <h4 className='text-center'><em>Make an offer!</em></h4>
