@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-regular-svg-icons'
 import Home from './pages/home.js'
 import Offers from './pages/offers.js';
 import Sell from './pages/sell.js';
@@ -22,6 +24,9 @@ function App() {
                         <Nav.Link href="/sell">Sell</Nav.Link>
                         <Nav.Link href="/holders">Holders</Nav.Link>
                     </Nav>
+                    <Navbar.Collapse className='justify-content-end'>
+                        <FontAwesomeIcon icon={faUser} size='lg' />
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
             <Routes>

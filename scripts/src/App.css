@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.fa-user {
+  color: white;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
