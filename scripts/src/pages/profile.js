@@ -8,7 +8,7 @@ class Profile extends Component {
     }
     
     async loadBlockchainData() {
-    const web3Connection = new Web3(Web3.requestProvider)
+    const web3Connection = new Web3(Web3.givenProvider)
 
     const accounts = await web3Connection.eth.getAccounts()
     this.setState({ account: accounts[0]})
@@ -33,6 +33,21 @@ class Profile extends Component {
     }
 
     //this.offer = this.offer.bind(this)
+    }
+
+    render() {
+        return(
+            <div>
+                <div className='container-fluid mt-4'>
+                    <div className='col-md-6 offset-md-3'>
+                        <h5 className='text-start text-success'>Address: {}</h5>
+                        <h5 className='text-start text-success'>Balance: {}</h5>
+                        <h5 className='text-start text-success'>Available tokens: {}</h5>
+                        <h5 className='text-start text-success'>My offers: {}</h5>
+                    </div>
+                </div>
+            </div>
+        );
     }
 }
 

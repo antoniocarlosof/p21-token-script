@@ -40,8 +40,8 @@ function App() {
                 <Route exact path='/' element={<Home/>} />
                 <Route path='/offers' element={<Offers/>} />
                 <Route path='/sell' element={<Sell/>} />
-                <Route path='/holders' component={<Holders/>} /> 
-                <Route path='/profile' component={<Profile/>} />   
+                <Route path='/holders' element={<Holders/>} /> 
+                <Route path='/profile' element={<Profile/>} />   
             </Routes>
         </div>
       </Router>
