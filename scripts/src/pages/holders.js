@@ -8,7 +8,7 @@ class Holders extends Component{
     }
 
     async loadBlockchainData() {
-    const web3Connection = new Web3(Web3.givenProvider || "http://localhost:8545")
+    const web3Connection = new Web3(Web3.givenProvider)
 
     const accounts = await web3Connection.eth.getAccounts()
     this.setState({ account: accounts[0]})
