@@ -32,7 +32,7 @@ class Profile extends Component {
         }
     }
 
-    console.log(this.state.userOffers)
+    //console.log(this.state.userOffers)
 
     this.setState({ loading: false })
     }
@@ -59,8 +59,38 @@ class Profile extends Component {
                         <h5 className='text-start text-success'>Balance: {this.state.balance}</h5>
                         <h5 className='text-start text-success'>Offered tokens: {this.state.amountOffered}</h5>
                         
-                        <div className='mt-4'>
+                        <div className='my-4'>
                             <h4 className='text-center text-success'>My offers</h4>
+                        </div>
+
+                        <div className='row'>
+                            <table className='table  text-center'>
+                                <thead>
+                                    <tr className='table-success'>
+                                        <th scope='col'>Address</th>
+                                        <th scope='col'>Price</th>
+                                        <th scope='col'>Amount of tokens</th>
+                                        <th scope='col'>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        this.state.userOffers?.map((offer) => {
+                                            return(
+                                                <tr>
+                                                    <td>{offer.owner}</td>
+                                                    <td>{offer.pricePerToken}</td>
+                                                    <td>{offer.amountOfTokens}</td>
+                                                    <td><button 
+                                                        type="button" 
+                                                        className="btn btn-danger" 
+                                                        onClick={(event) => this.setState({ offer: offer })}>Cancel offer</button></td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

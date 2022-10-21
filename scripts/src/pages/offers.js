@@ -3,6 +3,8 @@ import { Component } from 'react';
 import '../App.css';
 import OfferList from './offerlist.js';
 import { OFFER_LIST_ABI, OFFER_LIST_ADDRESS } from './config.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 class Offers extends Component {
   componentDidMount() {
@@ -68,7 +70,7 @@ class Offers extends Component {
               {
                 this.state.loading
                 ? <div id="loader" className="text-center">
-                    <p className="text-center text-success">Loading...</p>
+                    <FontAwesomeIcon icon={faSpinner} size='2x'></FontAwesomeIcon>
                   </div>
                 : <OfferList offers={this.state.offers} buy={this.buy}/>
               }

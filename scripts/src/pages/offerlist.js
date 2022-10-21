@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Link } from "react-router-dom";
 
 class OfferList extends Component {
     constructor(props) {
@@ -14,7 +13,7 @@ class OfferList extends Component {
             <div>
                 <div className='row'>
                         <div className='col-6'>
-                            <table className='table'>
+                            <table className='table text-center'>
                                 <thead>
                                     <tr className='table-success'>
                                         <th scope='col'>Address</th>
@@ -41,10 +40,6 @@ class OfferList extends Component {
                                     }
                                 </tbody>
                             </table>
-                            <Link
-                                type='button'
-                                className='btn btn-danger'
-                                to='/'>Voltar</Link>
                         </div>
                         <div className='col-6'>
                         {
@@ -54,7 +49,8 @@ class OfferList extends Component {
                                 <h5 className='text-start'><em>Tokens available:</em> {this.state.offer.amountOfTokens}</h5>
                                 <h5 className='text-start'><em>Price of each token:</em> {this.state.offer.pricePerToken} USD</h5>
                                 <input 
-                                    type='number'  
+                                    type='number' 
+                                    className='me-2' 
                                     max={this.state.offer.amountOfTokens} 
                                     min={1} 
                                     id='amountToBuy'
@@ -64,7 +60,9 @@ class OfferList extends Component {
                                     className='btn btn-success'
                                     onClick={(event) => this.props.buy(this.state.offer.id, this.state.amount)}>Buy</button>
                             </div>
-                            : <div>Choose an offer</div>
+                            : <div className='text-center text-wrap'>
+                                <h3 className='text-success'>Choose an offer</h3>
+                            </div>
                         }
                         </div>
                 </div> 
