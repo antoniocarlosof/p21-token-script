@@ -29,7 +29,7 @@ function App() {
                     <Nav className="me-auto">
                         <Nav.Link href="/offers">Offers</Nav.Link>
                         <Nav.Link href="/sell">Sell</Nav.Link>
-                        <Nav.Link href="/holders">Holders</Nav.Link>
+                        <Nav.Link href="https://goerli.etherscan.io/token/0x87569c933d5535a564062be0a223391333f8b4d2#balances">Holders</Nav.Link>
                     </Nav>
                     <Navbar.Collapse className='justify-content-end'>
                         <Nav.Link href="/profile"> <FontAwesomeIcon icon={faUser} size='lg' /> </Nav.Link>

@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import Web3 from 'web3';
+import '../App.css';
 import { OFFER_LIST_ABI, OFFER_LIST_ADDRESS } from './config.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 class Profile extends Component {
     componentDidMount() {
@@ -8,28 +11,28 @@ class Profile extends Component {
     }
     
     async loadBlockchainData() {
-    const web3Connection = new Web3(Web3.givenProvider)
+        const web3Connection = new Web3(Web3.givenProvider)
 
-    const accounts = await web3Connection.eth.getAccounts()
-    this.setState({ account: accounts[0]})
+        const accounts = await web3Connection.eth.getAccounts()
+        this.setState({ account: accounts[0]})
 
-    const smartContract = new web3Connection.eth.Contract(OFFER_LIST_ABI, OFFER_LIST_ADDRESS)
-    this.setState({ smartContract })
+        const smartContract = new web3Connection.eth.Contract(OFFER_LIST_ABI, OFFER_LIST_ADDRESS)
+        this.setState({ smartContract })
 
-    const balance = await smartContract.methods.balanceOf(accounts[0]).call()
-    const amountOffered = await smartContract.methods.amountOffered(accounts[0]).call()
-    this.setState({ balance, amountOffered })
+        const balance = await smartContract.methods.balanceOf(accounts[0]).call()
+        const amountOffered = await smartContract.methods.amountOffered(accounts[0]).call()
+        this.setState({ balance, amountOffered })
 
-    const offerCount = await smartContract.methods.offerCount().call()
+        const offerCount = await smartContract.methods.offerCount().call()
 
-    for(var i = 0; i < offerCount; i++){
-        const offer = await smartContract.methods.offerList(i).call()
+        for(var i = 0; i < offerCount; i++){
+            const offer = await smartContract.methods.offerList(i).call()
 
-        if (offer.amountOfTokens > 0 && offer.owner === accounts[0]){
-            this.setState({
-                userOffers: [...this.state.userOffers, offer]
-            })
-        }
+            if (offer.amountOfTokens > 0 && offer.owner === accounts[0]){
+                this.setState({
+                    userOffers: [...this.state.userOffers, offer]
+                })
+            }
     }
 
     //console.log(this.state.userOffers)
@@ -38,16 +41,25 @@ class Profile extends Component {
     }
 
     constructor(props) {
-    super(props)
-    this.state = { 
-        account: '',
-        amountOffered: '',
-        balance: '',
-        userOffers: [],
-        loading: true
+        super(props)
+        this.state = { 
+            account: '',
+            amountOffered: '',
+            balance: '',
+            userOffers: [],
+            loading: true
+        }
+
+        this.withdraw = this.withdraw.bind(this)
     }
 
-    //this.offer = this.offer.bind(this)
+    withdraw() {
+        this.setState({ loading: true })
+        this.state.smartContract.methods.withdrawOffer(this.state.offer.id, this.state.offer.amountOfTokens)
+        .send({ from: this.state.account})
+        .once('receipt', (receipt) => {
+            this.setState({ loading: false, cancel: false})
+        })
     }
 
     render() {
@@ -64,6 +76,24 @@ class Profile extends Component {
                         </div>
 
                         <div className='row'>
+                            <div>
+                            {
+                                this.state.cancel
+                                ? <div className='card my-2 border-danger text-danger'>
+                                    <div className='card-header bg-transparent border-danger'>
+                                        <FontAwesomeIcon icon={faTriangleExclamation} size='lg'></FontAwesomeIcon>
+                                    </div>
+                                    <div className='card-body'>
+                                        <p className='card-text'>You are about to take out your offer from the offers list. Do you want to proceed?</p>
+                                        <button
+                                            type='button'
+                                            className='btn btn-outline-danger'
+                                            onClick={(event) => this.withdraw()}>Continue</button>
+                                    </div>
+                                </div>
+                                : <div></div>
+                            }
+                            </div>
                             <table className='table  text-center'>
                                 <thead>
                                     <tr className='table-success'>
@@ -84,7 +114,7 @@ class Profile extends Component {
                                                     <td><button 
                                                         type="button" 
                                                         className="btn btn-danger" 
-                                                        onClick={(event) => this.setState({ offer: offer })}>Cancel offer</button></td>
+                                                        onClick={(event) => this.setState({ cancel: true, offer: offer })}>Cancel offer</button></td>
                                                 </tr>
                                             )
                                         })

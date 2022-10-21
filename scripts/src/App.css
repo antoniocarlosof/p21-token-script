@@ -6,6 +6,10 @@
   color: white;
 }
 
+.fa-triangle-exclamation {
+  color: #dc3545;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
