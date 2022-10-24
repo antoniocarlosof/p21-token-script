@@ -53,9 +53,9 @@ class Profile extends Component {
         this.withdraw = this.withdraw.bind(this)
     }
 
-    withdraw() {
+    withdraw(amount) {
         this.setState({ loading: true })
-        this.state.smartContract.methods.withdrawOffer(this.state.offer.id, this.state.offer.amountOfTokens)
+        this.state.smartContract.methods.withdrawOffer(this.state.offer.id, amount)
         .send({ from: this.state.account})
         .once('receipt', (receipt) => {
             this.setState({ loading: false, cancel: false})
@@ -84,17 +84,41 @@ class Profile extends Component {
                                         <FontAwesomeIcon icon={faTriangleExclamation} size='lg'></FontAwesomeIcon>
                                     </div>
                                     <div className='card-body'>
-                                        <p className='card-text'>You are about to take out your offer from the offers list. Do you want to proceed?</p>
+                                        <p className='card-text'>You are about to withdraw your offer from the offers list. Do you want to proceed?</p>
+                                        <div className='row mb-2'>
+                                            <div className='col-auto'>
+                                                <p className='card-text text-end'>Withdraw</p>
+                                            </div>
+                                            <div className='col-auto'>
+                                                <input
+                                                    type='number'
+                                                    className='form-control'
+                                                    max={this.state.offer.amountOfTokens}
+                                                    min={1}
+                                                    onChange={(input) => this.setState({amount: input.target.value})}>
+                                                </input>
+                                            </div>
+                                            <div className='col-auto'>
+                                                <p className='card-text text-end'>tokens.</p>
+                                            </div>
+                                        </div>
                                         <button
                                             type='button'
                                             className='btn btn-outline-danger'
-                                            onClick={(event) => this.withdraw()}>Continue</button>
+                                            onClick={(event) => this.withdraw(this.state.amount)}>Continue</button>
                                     </div>
                                 </div>
                                 : <div></div>
                             }
                             </div>
-                            <table className='table  text-center'>
+                            {
+                            this.state.loading
+                            ? <div className='d-flex justify-content-center'>
+                                <div id="loader" className="spinner-border text-success" role='status'>
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                            : <table className='table  text-center'>
                                 <thead>
                                     <tr className='table-success'>
                                         <th scope='col'>Address</th>
@@ -121,6 +145,7 @@ class Profile extends Component {
                                     }
                                 </tbody>
                             </table>
+                            }
                         </div>
                     </div>
                 </div>

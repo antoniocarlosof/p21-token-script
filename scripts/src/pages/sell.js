@@ -1,3 +1,4 @@
+import '../App.css';
 import Web3 from 'web3';
 import { Component } from 'react';
 import { OFFER_LIST_ABI, OFFER_LIST_ADDRESS } from './config.js';
@@ -55,36 +56,43 @@ class Sell extends Component{
 
                   <div className='mt-4'>
                     <h4 className='text-center'><em>Make an offer!</em></h4>
+                    {
+                      this.state.loading
+                      ? <div className='d-flex justify-content-center'>
+                          <div id="loader" className="spinner-border text-success" role='status'>
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      : <div className='row justify-content-center mt-4'>
+                          <div className='col-auto'> 
+                            <p>Tokens</p>
+                            <input
+                              type='number'
+                              className='form-control'
+                              id='tokens'
+                              min={1}
+                              max={this.state.balance - this.state.amountOffered}
+                              onChange={(input) => this.setState({newOffer: input.target.value})}></input>
+                          </div> 
 
-                    <div className='row justify-content-center mt-4'>
-                      <div className='col-auto'> 
-                        <p>Tokens</p>
-                        <input
-                          type='number'
-                          className='form-control'
-                          id='tokens'
-                          min={1}
-                          max={this.state.balance - this.state.amountOffered}
-                          onChange={(input) => this.setState({newOffer: input.target.value})}></input>
-                      </div> 
+                          <div className='col-auto'>
+                            <p>Price per token - USD</p>
+                            <input
+                              type='number'
+                              className='form-control'
+                              id='price'
+                              min={0}
+                              onChange={(input) => this.setState({offerPrice: input.target.value})}></input>
+                          </div>
 
-                      <div className='col-auto'>
-                        <p>Price per token - USD</p>
-                        <input
-                          type='number'
-                          className='form-control'
-                          id='price'
-                          min={0}
-                          onChange={(input) => this.setState({offerPrice: input.target.value})}></input>
-                      </div>
-
-                      <div className='col-auto d-flex align-items-end'>
-                        <button
-                          type='button'
-                          className='btn btn-success'
-                          onClick={(event) => this.offer(this.state.newOffer, this.state.offerPrice)}>Offer</button>
-                      </div>
-                    </div>
+                          <div className='col-auto d-flex align-items-end'>
+                            <button
+                              type='button'
+                              className='btn btn-success'
+                              onClick={(event) => this.offer(this.state.newOffer, this.state.offerPrice)}>Offer</button>
+                          </div>
+                        </div>
+                    }
                   </div>
                 </div>
               </div>

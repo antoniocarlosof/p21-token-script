@@ -24,8 +24,8 @@ function App() {
                             src="https://p21website.com.br/wp-content/uploads/2020/07/logo-white.png"
                             width="80"
                             height="60"
-                            className="d-inline-block mx-2"/>
-                        Room123 Token</Navbar.Brand>
+                            className="d-inline-block mx-2"/> Room123 Token
+                        </Navbar.Brand>
                     <Nav className="me-auto">
                         <Nav.Link href="/offers">Offers</Nav.Link>
                         <Nav.Link href="/sell">Sell</Nav.Link>
