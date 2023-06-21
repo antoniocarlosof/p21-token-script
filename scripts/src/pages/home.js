@@ -21,7 +21,7 @@ class Home extends Component{
                     <a
                         type='button'
                         className='btn btn-success btn-lg'
-                        href='https://goerli.etherscan.io/address/0x87569c933d5535a564062be0a223391333f8b4d2'>Check out our smart contract on Etherscan!</a>            
+                        href='https://goerli.etherscan.io/address/0x87569c933d5535a564062be0a223391333f8b4d2'>Check our smart contract on Etherscan!</a>            
                 </div>
             </div>
         )
